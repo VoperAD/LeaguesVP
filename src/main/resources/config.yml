@@ -1,0 +1,65 @@
+# Placeholders:
+# %leaguesvp_cpoints% -> Shows the points of a player's clan. Returns 0 if the player isn't in a clan.
+# %leaguesvp_top_position% -> Shows the rank position of a player's clan. Returns 0 if the player isn't in a clan.
+
+settings:
+  global-sound: true
+  clan:
+    # Allows clans to have negative points.
+    negative-balance: false
+
+    # Default starting points for every clan
+    starting-points: 1000
+
+    # Automatically registers all the clans. It's recommended to keep it true.
+    auto-load: true
+
+commands:
+  # Alias for the main command
+  leaguesvp:
+    - 'leaguesvp'
+    - 'lvp'
+
+  # Names for the subcommands (only one)
+  givepoints: 'givepoints'
+  giveall: 'givepoints all'
+  removepoints: 'removepoints'
+  removeall: 'removepoints all'
+  resetpoints: 'resetpoints'
+  resetall: 'resetpoints all'
+  register: 'register'
+  unregister: 'unregister'
+  top:
+    name: 'top'
+    header: '&b------- Top Clans -------'
+    # Message sent to a player when they try to access an invalid page -> (page * 10) - 9 > number of clans || page <= 0
+    invalid-page: '&cUnable to access this page.'
+
+    # %position% -> clan position in the top/rank
+    position: '%position% - &f[%simpleclans_clan_color_tag%&f] %simpleclans_clan_name% &a- %leaguesvp_cpoints% points.'
+
+  info:
+    name: 'info'
+    message: '&bThe clan &f[%simpleclans_clan_color_tag%&f] &b- &9%simpleclans_clan_name% &bhas %leaguesvp_cpoints% points.'
+
+  # Global messages support hex colors.
+  # If you want to disable a specific global message, just leave it with no characters --> ''
+  global-messages:
+    enabled: true
+
+    # Every global message will have this prefix (supports hex colors)
+    # If you want to disable it, just leave it with no characters --> ''
+    prefix: '&f[&bLeagues&f]'
+
+    # Use %points% to refer to the amount of given/removed points (this is not a placeholder)
+    # Global messages must never be null. Otherwise, they will generate an error.
+    givepoints: '&bThe clan &f[%simpleclans_clan_color_tag%&f] &b- &9%simpleclans_clan_name% &bhas just &areceived %points% points!'
+    giveall: '&bAll the clans have just received %points% points!'
+    removepoints: '&bThe clan &f[%simpleclans_clan_color_tag%&f] &b- &9%simpleclans_clan_name% &bhas just &clost %points% points!'
+    removeall: '&bAll the clans have just lost %points% points!'
+    resetpoints: '&bThe clan &f[%simpleclans_clan_color_tag%&f] &b- &9%simpleclans_clan_name% &bhas just had it''s points &creset to zero!'
+    resetall: '&bAll the clans have just had their points &creset to zero!'
+
+  # If set to true every command that modifies the amount of points of a clan will send
+  # a message to who issued it confirming that the command was successful.
+  confirmation-message: false

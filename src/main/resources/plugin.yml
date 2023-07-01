@@ -1,0 +1,43 @@
+name: LeaguesVP
+version: ${project.version}
+author: Voper
+description: An addon for SimpleClans that implements a league system.
+main: me.voper.leaguesvp.LeaguesVP
+api-version: '1.13'
+depend:
+  - SimpleClans
+softdepend:
+  - PlaceholderAPI
+permissions:
+  leaguesvp.admin.givepoints:
+    description: Can give points to a clan
+  leaguesvp.admin.removepoints:
+    description: Can remove the points of a clan
+  leaguesvp.admin.resetpoints:
+    description: Can reset the points of a clan or all the clans
+  leaguesvp.admin.register:
+    description: Can manually register a clan to the clansdata file
+  leaguesvp.admin.unregister:
+    description: Can manually unregister a clan from the clansdata file
+  leaguesvp.admin.reload:
+    description: Can reload the plugin
+  leaguesvp.anyone.info:
+    description: Can see the quantity of points of a clan
+  leaguesvp.anyone.top:
+    description: Can see the top 10 clans with the most points
+  leaguesvp.admin.*:
+    description: Permissions for admins
+    default: op
+    children:
+      leaguesvp.admin.givepoints: true
+      leaguesvp.admin.removepoints: true
+      leaguesvp.admin.resetpoints: true
+      leaguesvp.admin.register: true
+      leaguesvp.admin.unregister: true
+      leaguesvp.admin.reload: true
+  leaguesvp.anyone.*:
+    description: Permissions for anyone
+    default: not op
+    children:
+      leaguesvp.anyone.info: true
+      leaguesvp.anyone.top: true
