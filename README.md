@@ -1,8 +1,6 @@
 <h1 align="center">Leagues VP</h1>
 
-<p align="center">
-<img src="https://imgur.com/a/DEXj3xJe"/>
-</p>
+![Leagues VP Logo - Imgur](https://github.com/VoperAD/LeaguesVP/assets/92862848/2d47918d-3fa1-4088-b198-42e3d3b79c46)
 
 #### Download Link
 - <a href="https://www.spigotmc.org/resources/leaguesvp.110922/">Download from Spigot</a>
@@ -39,8 +37,8 @@ Feel free to give us any suggestion.
 
 # :framed_picture: Screenshots 
 
-![Top clans](https://imgur.com/a/WVu3IgQ)
-![Help command](https://imgur.com/wDNUJI3)
+![Captura de Tela 2023-07-01 às 16 07 38](https://github.com/VoperAD/LeaguesVP/assets/92862848/15124866-95f0-42ae-95d4-ec4901045131)
+![Captura de Tela 2023-07-01 às 20 19 24](https://github.com/VoperAD/LeaguesVP/assets/92862848/7b2843d6-9def-4868-9bb8-95e77a5b3499)
 
 # Credits
 
