@@ -1,8 +1,6 @@
 <h1 align="center">Leagues VP</h1>
 
-<p align="center">
-<img src="https://imgur.com/a/DEXj3xJe"/>
-</p>
+[Alt Imgur](https://imgur.com/hB932bh)
 
 #### Download Link
 - <a href="https://www.spigotmc.org/resources/leaguesvp.110922/">Download from Spigot</a>
@@ -39,9 +37,8 @@ Feel free to give us any suggestion.
 
 # :framed_picture: Screenshots 
 
-![Top clans](https://imgur.com/a/WVu3IgQ)
-![Help command](https://imgur.com/wDNUJI3)
-
+[Alt Imgur](https://imgur.com/tSxaFnj)
+[Alt Imgur](https://imgur.com/wDNUJI3)
 # Credits
 
 First of all, I would like to thank RoinujNosde, who solved many of my doubts when I
