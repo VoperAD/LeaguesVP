@@ -1,6 +1,8 @@
 # Placeholders:
 # %leaguesvp_cpoints% -> Shows the points of a player's clan. Returns 0 if the player isn't in a clan.
 # %leaguesvp_top_position% -> Shows the rank position of a player's clan. Returns 0 if the player isn't in a clan.
+# %leaguesvp_cpoints_<position>% -> Shows how many points the clan in the specified position has
+# %leaguesvp_clan_<position>% -> Shows the name of the clan that is in the specified position
 
 settings:
   global-sound: true
