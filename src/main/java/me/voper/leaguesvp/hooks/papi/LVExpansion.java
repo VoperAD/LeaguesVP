@@ -4,6 +4,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.voper.leaguesvp.LeaguesVP;
 import me.voper.leaguesvp.data.ClanData;
 import me.voper.leaguesvp.data.GsonManager;
+import net.sacredlabyrinth.phaed.simpleclans.Clan;
 import net.sacredlabyrinth.phaed.simpleclans.ClanPlayer;
 import net.sacredlabyrinth.phaed.simpleclans.managers.ClanManager;
 import org.bukkit.OfflinePlayer;
@@ -11,6 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LVExpansion extends PlaceholderExpansion {
 
@@ -62,6 +65,10 @@ public class LVExpansion extends PlaceholderExpansion {
             return "";
         }
 
+        List<ClanData> clanTop = gsonManager.getClanTop();
+        Pattern pattern;
+        Matcher matcher;
+
         cp = clanManager.getClanPlayer(player);
         clanData = cp != null ? gsonManager.findClan(cp.getClan()) : null;
 
@@ -70,8 +77,28 @@ public class LVExpansion extends PlaceholderExpansion {
         }
 
         if (params.equals("top_position")) {
-            List<ClanData> topClans = gsonManager.getClanTop();
-            return topClans.contains(clanData) ? String.valueOf(topClans.indexOf(clanData) + 1) : "0";
+            return clanTop.contains(clanData) ? String.valueOf(clanTop.indexOf(clanData) + 1) : "0";
+        }
+
+        // %leaguesvp_cpoints_<position>%
+        pattern = Pattern.compile("cpoints_(?<position>\\d+)");
+        matcher = pattern.matcher(params);
+        if (matcher.matches()) {
+            String posString = matcher.group("position");
+            int pos = Integer.parseInt(posString) + 1;
+            if (pos >= clanTop.size() || pos <= 0) return "";
+            return String.valueOf(clanTop.get(pos).getPoints());
+        }
+
+        // %leaguesvp_clan_<position>%
+        pattern = Pattern.compile("clan_(?<position>\\d+)");
+        matcher = pattern.matcher(params);
+        if (matcher.matches()) {
+            String posString = matcher.group("position");
+            int pos = Integer.parseInt(posString) + 1;
+            if (pos >= clanTop.size() || pos <= 0) return "";
+            Clan clan = clanManager.getClan(clanTop.get(pos).getTag());
+            return clan.getName();
         }
 
         return null;
