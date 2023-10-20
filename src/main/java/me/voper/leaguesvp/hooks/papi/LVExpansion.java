@@ -65,6 +65,7 @@ public class LVExpansion extends PlaceholderExpansion {
             return "";
         }
 
+        gsonManager.updateClanTop();
         List<ClanData> clanTop = gsonManager.getClanTop();
         Pattern pattern;
         Matcher matcher;
@@ -85,8 +86,8 @@ public class LVExpansion extends PlaceholderExpansion {
         matcher = pattern.matcher(params);
         if (matcher.matches()) {
             String posString = matcher.group("position");
-            int pos = Integer.parseInt(posString) + 1;
-            if (pos >= clanTop.size() || pos <= 0) return "";
+            int pos = Integer.parseInt(posString) - 1;
+            if (pos >= clanTop.size() || pos < 0) return "";
             return String.valueOf(clanTop.get(pos).getPoints());
         }
 
@@ -95,8 +96,8 @@ public class LVExpansion extends PlaceholderExpansion {
         matcher = pattern.matcher(params);
         if (matcher.matches()) {
             String posString = matcher.group("position");
-            int pos = Integer.parseInt(posString) + 1;
-            if (pos >= clanTop.size() || pos <= 0) return "";
+            int pos = Integer.parseInt(posString) - 1;
+            if (pos >= clanTop.size() || pos < 0) return "";
             Clan clan = clanManager.getClan(clanTop.get(pos).getTag());
             return clan.getName();
         }
