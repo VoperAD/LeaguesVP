@@ -1,6 +1,8 @@
 <h1 align="center">Leagues VP</h1>
 
-![Leagues VP Logo - Imgur](https://github.com/VoperAD/LeaguesVP/assets/92862848/2d47918d-3fa1-4088-b198-42e3d3b79c46)
+<div align="center">
+    <img src="https://github.com/VoperAD/LeaguesVP/assets/92862848/2d47918d-3fa1-4088-b198-42e3d3b79c46" alt="Leagues VP Logo - Imgur" />
+</div>
 
 #### Download Link
 - <a href="https://www.spigotmc.org/resources/leaguesvp.110922/">Download from Spigot</a>
@@ -34,6 +36,9 @@ Feel free to give us any suggestion.
 
 - `%leaguesvp_cpoints%` - Show the amount of points of a player's clan
 - `%leaguesvp_top_position%` - Show the clan position in the rank
+- `%leaguesvp_cpoints_<position>%` - Show how many points the clan in the given position has
+- `%leaguesvp_clan_<position>%` - Show the name of clan in the given position
+- `%leaguesvp_clantag_<position>%` - Show the color tag of the clan in the given position
 
 # :framed_picture: Screenshots 
 
