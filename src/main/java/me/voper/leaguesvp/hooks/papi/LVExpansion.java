@@ -73,10 +73,12 @@ public class LVExpansion extends PlaceholderExpansion {
         cp = clanManager.getClanPlayer(player);
         clanData = cp != null ? gsonManager.findClan(cp.getClan()) : null;
 
+        // %leaguesvp_cpoints%
         if (params.equals("cpoints")) {
             return clanData != null ? String.valueOf(clanData.getPoints()) : "0";
         }
 
+        // %leaguesvp_top_position%
         if (params.equals("top_position")) {
             return clanTop.contains(clanData) ? String.valueOf(clanTop.indexOf(clanData) + 1) : "0";
         }
@@ -100,6 +102,17 @@ public class LVExpansion extends PlaceholderExpansion {
             if (pos >= clanTop.size() || pos < 0) return "";
             Clan clan = clanManager.getClan(clanTop.get(pos).getTag());
             return clan.getName();
+        }
+
+        // %leaguesvp_clantag_<position>%
+        pattern = Pattern.compile("clan_(?<position>\\d+)");
+        matcher = pattern.matcher(params);
+        if (matcher.matches()) {
+            String posString = matcher.group("position");
+            int pos = Integer.parseInt(posString) - 1;
+            if (pos >= clanTop.size() || pos < 0) return "";
+            Clan clan = clanManager.getClan(clanTop.get(pos).getTag());
+            return clan.getColorTag();
         }
 
         return null;
