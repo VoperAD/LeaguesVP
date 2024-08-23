@@ -105,7 +105,7 @@ public class LVExpansion extends PlaceholderExpansion {
         }
 
         // %leaguesvp_clantag_<position>%
-        pattern = Pattern.compile("clan_(?<position>\\d+)");
+        pattern = Pattern.compile("clantag_(?<position>\\d+)");
         matcher = pattern.matcher(params);
         if (matcher.matches()) {
             String posString = matcher.group("position");
