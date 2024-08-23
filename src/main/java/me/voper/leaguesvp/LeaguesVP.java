@@ -12,6 +12,7 @@ import me.voper.leaguesvp.listeners.RemoveClans;
 import me.voper.leaguesvp.managers.SettingsManager;
 import net.sacredlabyrinth.phaed.simpleclans.SimpleClans;
 import net.sacredlabyrinth.phaed.simpleclans.managers.ClanManager;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LeaguesVP extends JavaPlugin {
@@ -25,6 +26,8 @@ public final class LeaguesVP extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        new Metrics(this, SPIGOT_RESOURCE_ID);
 
         new UpdateChecker(this, UpdateCheckSource.SPIGET, String.valueOf(SPIGOT_RESOURCE_ID))
                 .setDownloadLink(SPIGOT_RESOURCE_ID)
