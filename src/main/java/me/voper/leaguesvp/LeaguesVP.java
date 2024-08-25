@@ -27,7 +27,7 @@ public final class LeaguesVP extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        new Metrics(this, SPIGOT_RESOURCE_ID);
+        new Metrics(this, 23182);
 
         new UpdateChecker(this, UpdateCheckSource.SPIGET, String.valueOf(SPIGOT_RESOURCE_ID))
                 .setDownloadLink(SPIGOT_RESOURCE_ID)
