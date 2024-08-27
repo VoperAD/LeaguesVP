@@ -13,6 +13,7 @@ import me.voper.leaguesvp.managers.SettingsManager;
 import net.sacredlabyrinth.phaed.simpleclans.SimpleClans;
 import net.sacredlabyrinth.phaed.simpleclans.managers.ClanManager;
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LeaguesVP extends JavaPlugin {
@@ -26,8 +27,6 @@ public final class LeaguesVP extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
-        new Metrics(this, 23182);
 
         new UpdateChecker(this, UpdateCheckSource.SPIGET, String.valueOf(SPIGOT_RESOURCE_ID))
                 .setDownloadLink(SPIGOT_RESOURCE_ID)
@@ -45,11 +44,17 @@ public final class LeaguesVP extends JavaPlugin {
         new LVCommandsManager(this);
         this.registerEvents();
         this.logStatus();
+        this.startMetrics();
     }
     
     @Override
     public void onDisable() {
         getDataManager().save();
+    }
+
+    private void startMetrics() {
+        Metrics metrics = new Metrics(this, 23182);
+        metrics.addCustomChart(new SimplePie("auto_load", () -> settingsManager.getBoolean(SettingsManager.ConfigField.AUTO_LOAD_CLANS) ? "on" : "off"));
     }
 
     private void logStatus() {
