@@ -2,8 +2,6 @@ package me.voper.leaguesvp.hooks.papi;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.voper.leaguesvp.LeaguesVP;
-import me.voper.leaguesvp.data.ClanData;
-import me.voper.leaguesvp.data.GsonManager;
 import me.voper.leaguesvp.data.LVPClan;
 import me.voper.leaguesvp.managers.StorageManager;
 import net.sacredlabyrinth.phaed.simpleclans.Clan;
@@ -13,7 +11,6 @@ import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;

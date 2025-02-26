@@ -8,6 +8,7 @@ import me.voper.leaguesvp.commands.LVCommandsManager;
 import me.voper.leaguesvp.hooks.papi.LVExpansion;
 import me.voper.leaguesvp.listeners.RegisterClans;
 import me.voper.leaguesvp.listeners.RemoveClans;
+import me.voper.leaguesvp.managers.MigrationManager;
 import me.voper.leaguesvp.managers.SettingsManager;
 import me.voper.leaguesvp.managers.StorageManager;
 import me.voper.leaguesvp.tasks.SaveDataTaskVP;
@@ -44,7 +45,6 @@ public final class LeaguesVP extends JavaPlugin {
 
         this.clanManager = SimpleClans.getInstance().getClanManager();
         this.settingsManager = new SettingsManager(this);
-        // dataManager = new GsonManager(this);
         this.storageManager = new StorageManager(this);
         new LVExpansion(this);
         new LVCommandsManager(this);
@@ -52,6 +52,9 @@ public final class LeaguesVP extends JavaPlugin {
         this.registerEvents();
         this.logStatus();
         this.startMetrics();
+
+        MigrationManager migration = new MigrationManager(this);
+        migration.migrateFromJsonToDb();
     }
     
     @Override
