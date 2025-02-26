@@ -6,6 +6,7 @@
 # %leaguesvp_clantag_<position>% -> Shows the color tag of the clan in the given position
 
 settings:
+  debug-mode: false
   global-sound: true
   clan:
     # Allows clans to have negative points.
@@ -16,6 +17,16 @@ settings:
 
     # Automatically registers all the clans. It's recommended to keep it true.
     auto-load: true
+
+# MySQL config
+# The default storage solution is now SQLite
+mysql:
+  enable: false
+  host: ''
+  port: 3306
+  database: 'leaguesvp'
+  username: ''
+  password: ''
 
 commands:
   # Alias for the main command
@@ -62,7 +73,3 @@ commands:
     removeall: '&bAll the clans have just lost %points% points!'
     resetpoints: '&bThe clan &f[%simpleclans_clan_color_tag%&f] &b- &9%simpleclans_clan_name% &bhas just had it''s points &creset to zero!'
     resetall: '&bAll the clans have just had their points &creset to zero!'
-
-  # If set to true every command that modifies the amount of points of a clan will send
-  # a message to who issued it confirming that the command was successful.
-  confirmation-message: false

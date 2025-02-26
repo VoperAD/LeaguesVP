@@ -2,8 +2,8 @@ package me.voper.leaguesvp.hooks.papi;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.voper.leaguesvp.LeaguesVP;
-import me.voper.leaguesvp.data.ClanData;
-import me.voper.leaguesvp.data.GsonManager;
+import me.voper.leaguesvp.data.LVPClan;
+import me.voper.leaguesvp.managers.StorageManager;
 import net.sacredlabyrinth.phaed.simpleclans.Clan;
 import net.sacredlabyrinth.phaed.simpleclans.ClanPlayer;
 import net.sacredlabyrinth.phaed.simpleclans.managers.ClanManager;
@@ -12,17 +12,19 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LVExpansion extends PlaceholderExpansion {
 
-    private static final GsonManager gsonManager = LeaguesVP.getDataManager();
     private final LeaguesVP plugin;
+    private final StorageManager storageManager;
     private final ClanManager clanManager;
 
     public LVExpansion(LeaguesVP plugin) {
         this.plugin = plugin;
+        this.storageManager = plugin.getStorageManager();
         this.clanManager = this.plugin.getClanManager();
         this.register();
     }
@@ -59,28 +61,30 @@ public class LVExpansion extends PlaceholderExpansion {
 
     @Override
     public @Nullable String onRequest(OfflinePlayer player, @NotNull String params) {
-        ClanPlayer cp;
-        ClanData clanData;
         if (player == null) {
             return "";
         }
 
-        gsonManager.updateClanTop();
-        List<ClanData> clanTop = gsonManager.getClanTop();
+        ClanPlayer cp = clanManager.getClanPlayer(player);
+        List<LVPClan> clanTop = storageManager.getClansSorted();
+        LVPClan lvpClan = null;
+
+        if (cp != null) {
+            Optional<LVPClan> clanOptional = storageManager.getLvpClanByTag(cp.getClan().getTag());
+            lvpClan = clanOptional.orElse(null);
+        }
+
         Pattern pattern;
         Matcher matcher;
 
-        cp = clanManager.getClanPlayer(player);
-        clanData = cp != null ? gsonManager.findClan(cp.getClan()) : null;
-
         // %leaguesvp_cpoints%
         if (params.equals("cpoints")) {
-            return clanData != null ? String.valueOf(clanData.getPoints()) : "0";
+            return lvpClan != null ? String.valueOf(lvpClan.getPoints()) : "0";
         }
 
         // %leaguesvp_top_position%
         if (params.equals("top_position")) {
-            return clanTop.contains(clanData) ? String.valueOf(clanTop.indexOf(clanData) + 1) : "0";
+            return clanTop.contains(lvpClan) ? String.valueOf(clanTop.indexOf(lvpClan) + 1) : "0";
         }
 
         // %leaguesvp_cpoints_<position>%

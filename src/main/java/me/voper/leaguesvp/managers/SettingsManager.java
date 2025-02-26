@@ -53,7 +53,6 @@ public final class SettingsManager {
         REMOVEALL_MESSAGE("commands.global-messages.removeall","&bAll the clans have just lost %points% points!"),
         RESETP_MESSAGE("commands.global-messages.resetpoints","&bThe clan &f[%simpleclans_clan_color_tag%&f] &b- &9%simpleclans_clan_name% &bhas just had it''s points &creset to zero!"),
         RESETALL_MESSAGE("commands.global-messages.resetall", "&bAll the clans have just had their points &creset to zero!"),
-        CONFIRMATION_MESSAGE("commands.confirmation-message", false),
         TOP_HEADER("commands.top.header","&b------- Top Clans -------"),
         TOP_INVALID_PAGE("commands.top.invalid-page","&cUnable to access this page."),
         TOP_POSITION("commands.top.position","%position% - &f[%simpleclans_clan_color_tag%&f] %simpleclans_clan_name% &a- %leaguesvp_cpoints% points."),
@@ -69,8 +68,17 @@ public final class SettingsManager {
         COMMAND_REGISTER("commands.register","register"),
         COMMAND_UNREGISTER("commands.unregister","unregister"),
         COMMAND_TOP("commands.top.name","top"),
-        COMMAND_INFO("commands.info.name","info");
+        COMMAND_INFO("commands.info.name","info"),
+        // DB CREDENTIALS
+        MYSQL_ENABLE("mysql.enable", false),
+        MYSQL_HOST("mysql.host"),
+        MYSQL_PORT("mysql.port", 3306),
+        MYSQL_DATABASE("mysql.database"),
+        MYSQL_USERNAME("mysql.username"),
+        MYSQL_PASSWORD("mysql.password"),
 
+        DEBUG_MODE("settings.debug-mode", false),
+        ;
 
         private final String path;
         private final Object value;
