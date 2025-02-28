@@ -1,0 +1,70 @@
+name: CD Release
+
+on:
+  workflow_run:
+    workflows: ["CI Build"]
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+jobs:
+  on-success:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3.13.0
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      - name: Get artifact id
+        id: project
+        run: |
+          ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+          echo "artifact=$ARTIFACT" >> $GITHUB_OUTPUT
+
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          skip-version-file: true
+          skip-commit: true
+          skip-tag: true
+          git-push: false
+
+      - name: Update pom.xml and push changes
+        if: steps.changelog.outputs.skipped == 'false'
+        run: |
+          mvn versions:set -DnewVersion=${{ steps.changelog.outputs.version }}
+          mvn versions:commit
+          git commit -am "chore(release): version ${{ steps.changelog.outputs.tag }} [skip ci]"
+          git tag -a ${{ steps.changelog.outputs.tag }} -m "${{ steps.changelog.outputs.tag }}"
+          git push origin main --follow-tags
+
+      - name: Generate jar
+        if: steps.changelog.outputs.skipped == 'false'
+        run: |
+          mvn package --file pom.xml
+
+      - name: Create release with last commit
+        if: steps.changelog.outputs.skipped == 'false'
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.changelog.outputs.tag }}
+          name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
+          artifacts: "target/${{ steps.project.outputs.artifact }}-v${{ steps.changelog.outputs.version }}.jar"
+
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'Triggering workflow failed'
