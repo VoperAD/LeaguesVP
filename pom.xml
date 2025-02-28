@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <SimpleClans.version>2.18.1</SimpleClans.version>
         <spigot-api.version>1.16.4-R0.1-SNAPSHOT</spigot-api.version>
-        <papi.version>2.11.2</papi.version>
+        <papi.version>2.11.6</papi.version>
     </properties>
 
     <build>
@@ -89,7 +89,7 @@
         </repository>
         <repository>
             <id>placeholderapi</id>
-            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+            <url>https://repo.extendedclip.com/releases/</url>
         </repository>
         <repository>
             <id>jeff-media-public</id>
